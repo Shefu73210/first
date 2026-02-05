@@ -2,39 +2,109 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Love You</title>
+  <title>Forever Us 💖</title>
 
   <style>
     body {
-      background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
-      height: 100vh;
       margin: 0;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: Arial, sans-serif;
+      overflow: hidden;
     }
 
-    .box {
+    .card {
       background: white;
       padding: 40px;
       border-radius: 20px;
       text-align: center;
+      width: 360px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      z-index: 2;
     }
 
     h1 {
       color: #ff4d6d;
     }
+
+    h2 {
+      color: #444;
+      min-height: 40px;
+    }
+
+    .big-note {
+      margin-top: 30px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #ff4d6d;
+    }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      animation: fall 3s linear infinite;
+    }
+
+    @keyframes fall {
+      from { transform: translateY(-10vh); }
+      to { transform: translateY(110vh); }
+    }
   </style>
 </head>
 <body>
 
-  <div class="box">
+  <!-- 🎵 Same music continues -->
+  <audio id="bgMusic" loop autoplay>
+    <source src="tere_hawale.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="card">
     <h1>YaY !!! 💖</h1>
-    <h2>I love you loadsssss 😘</h2>
-    <p>Happy Valentine’s Day ❤️</p>
+    <h2 id="typing"></h2>
+
+    <div class="big-note">
+      Forever yours,<br>
+      Pintoo ❤️ Chotee
+    </div>
   </div>
+
+  <script>
+    // 🎶 Fade-in music
+    const music = document.getElementById("bgMusic");
+    music.volume = 0;
+    music.play().catch(()=>{});
+    let v = 0;
+    const fade = setInterval(() => {
+      v += 0.05;
+      music.volume = Math.min(v, 0.8);
+      if (v >= 0.8) clearInterval(fade);
+    }, 200);
+
+    // ✍️ Typing animation
+    const text = "I love you loadsssss 😘";
+    let i = 0;
+    const typing = document.getElementById("typing");
+
+    const typeEffect = setInterval(() => {
+      typing.textContent += text[i];
+      i++;
+      if (i >= text.length) clearInterval(typeEffect);
+    }, 100);
+
+    // 🎉 Confetti
+    setInterval(() => {
+      const conf = document.createElement("div");
+      conf.className = "confetti";
+      conf.style.left = Math.random() * 100 + "vw";
+      conf.style.background = `hsl(${Math.random()*360},100%,70%)`;
+      document.body.appendChild(conf);
+      setTimeout(() => conf.remove(), 3000);
+    }, 100);
+  </script>
 
 </body>
 </html>
