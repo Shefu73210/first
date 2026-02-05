@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Will You Be My Valentine? 💖</title>
+  <title>Pintoo 💖 Chotee</title>
 
   <style>
     body {
@@ -28,7 +28,6 @@
 
     h1 {
       color: #ff4d6d;
-      margin-bottom: 10px;
     }
 
     img {
@@ -61,34 +60,22 @@
       background: #ccc;
       right: 40px;
     }
-
-    .heart {
-      position: absolute;
-      font-size: 20px;
-      animation: float 6s linear infinite;
-      opacity: 0.8;
-    }
-
-    @keyframes float {
-      0% { transform: translateY(100vh); }
-      100% { transform: translateY(-10vh); }
-    }
   </style>
 </head>
 <body>
 
-  <!-- 🎵 Background Music -->
+  <!-- 🎵 Music -->
   <audio id="bgMusic" loop>
     <source src="tere_hawale.mp3" type="audio/mpeg">
   </audio>
 
   <div class="card">
-    <h1>Will you be my Valentine? 💕</h1>
+    <h1>Pintoo ❤️</h1>
+    <p>Will you be my Valentine?</p>
 
-    <!-- 📸 Photo -->
-    <img src="Image.jpg" alt="Our Photo">
+    <img src="Image.jpg" alt="Us">
 
-    <p style="font-size:12px; color:#888;">🔊 Tap anywhere for music</p>
+    <p style="font-size:12px;color:#888;">🔊 Tap anywhere for music</p>
 
     <div class="buttons">
       <button id="yesBtn">YES 💖</button>
@@ -101,9 +88,16 @@
     const yesBtn = document.getElementById("yesBtn");
     const music = document.getElementById("bgMusic");
 
-    // 🎶 Start music on first click anywhere
+    // 🎶 Start music on first click with fade-in
     document.addEventListener("click", () => {
-      music.play().catch(() => {});
+      music.volume = 0;
+      music.play().catch(()=>{});
+      let v = 0;
+      const fade = setInterval(() => {
+        v += 0.05;
+        music.volume = Math.min(v, 0.8);
+        if (v >= 0.8) clearInterval(fade);
+      }, 200);
     }, { once: true });
 
     // 😈 NO button runs away
@@ -121,18 +115,6 @@
       localStorage.setItem("playMusic", "yes");
       window.location.href = "yes.html";
     });
-
-    // 💕 Floating hearts
-    setInterval(() => {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.innerHTML = "❤️";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.fontSize = Math.random() * 20 + 15 + "px";
-      document.body.appendChild(heart);
-
-      setTimeout(() => heart.remove(), 6000);
-    }, 300);
   </script>
 
 </body>
