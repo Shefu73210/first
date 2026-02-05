@@ -28,6 +28,7 @@
 
     h1 {
       color: #ff4d6d;
+      margin-bottom: 5px;
     }
 
     img {
@@ -39,6 +40,7 @@
     .buttons {
       position: relative;
       height: 90px;
+      margin-top: 10px;
     }
 
     button {
@@ -60,11 +62,17 @@
       background: #ccc;
       right: 40px;
     }
+
+    .music-note {
+      margin-top: 30px;
+      font-size: 11px;
+      color: #aaa;
+    }
   </style>
 </head>
 <body>
 
-  <!-- 🎵 Music -->
+  <!-- 🎵 Background Music -->
   <audio id="bgMusic" loop>
     <source src="tere_hawale.mp3" type="audio/mpeg">
   </audio>
@@ -75,12 +83,13 @@
 
     <img src="Image.jpg" alt="Us">
 
-    <p style="font-size:12px;color:#888;">🔊 Tap anywhere for music</p>
-
     <div class="buttons">
       <button id="yesBtn">YES 💖</button>
       <button id="noBtn">NO 🙈</button>
     </div>
+
+    <!-- 👇 subtle bottom note -->
+    <p class="music-note">🔊 Tap anywhere for music</p>
   </div>
 
   <script>
