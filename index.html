@@ -2,32 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Will You Be My Valentine?</title>
+  <title>Will You Be My Valentine? 💖</title>
 
   <style>
     body {
-      font-family: 'Arial', sans-serif;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-      height: 100vh;
       margin: 0;
-      overflow: hidden;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
       display: flex;
       justify-content: center;
       align-items: center;
+      overflow: hidden;
     }
 
     .card {
       background: white;
       padding: 30px;
       border-radius: 20px;
-      text-align: center;
       width: 340px;
+      text-align: center;
       box-shadow: 0 10px 25px rgba(0,0,0,0.2);
       z-index: 2;
     }
 
     h1 {
       color: #ff4d6d;
+      margin-bottom: 10px;
     }
 
     img {
@@ -44,64 +45,68 @@
     button {
       padding: 10px 22px;
       font-size: 16px;
-      border: none;
       border-radius: 25px;
+      border: none;
       cursor: pointer;
       position: absolute;
     }
 
     #yesBtn {
-      background-color: #ff4d6d;
+      background: #ff4d6d;
       color: white;
       left: 40px;
     }
 
     #noBtn {
-      background-color: #ccc;
+      background: #ccc;
       right: 40px;
     }
 
-    /* Floating hearts */
     .heart {
       position: absolute;
-      color: rgba(255, 77, 109, 0.7);
       font-size: 20px;
-      animation: floatUp 6s linear infinite;
+      animation: float 6s linear infinite;
+      opacity: 0.8;
     }
 
-    @keyframes floatUp {
-      0% {
-        transform: translateY(100vh);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-10vh);
-        opacity: 0;
-      }
+    @keyframes float {
+      0% { transform: translateY(100vh); }
+      100% { transform: translateY(-10vh); }
     }
   </style>
 </head>
 <body>
 
-  <!-- Background music -->
+  <!-- 🎵 Background Music -->
   <audio id="bgMusic" loop>
-  <source src="tere_hawale.mp3" type="audio/mpeg">
-</audio>
+    <source src="tere_hawale.mp3" type="audio/mpeg">
+  </audio>
 
   <div class="card">
     <h1>Will you be my Valentine? 💕</h1>
 
+    <!-- 📸 Photo -->
     <img src="Image.jpg" alt="Our Photo">
 
+    <p style="font-size:12px; color:#888;">🔊 Tap anywhere for music</p>
+
     <div class="buttons">
-      <button id="yesBtn" onclick="goYes()">YES 💖</button>
+      <button id="yesBtn">YES 💖</button>
       <button id="noBtn">NO 🙈</button>
     </div>
   </div>
 
   <script>
     const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const music = document.getElementById("bgMusic");
 
+    // 🎶 Start music on first click anywhere
+    document.addEventListener("click", () => {
+      music.play().catch(() => {});
+    }, { once: true });
+
+    // 😈 NO button runs away
     noBtn.addEventListener("mouseover", runAway);
     noBtn.addEventListener("click", runAway);
 
@@ -111,11 +116,13 @@
       noBtn.style.transform = `translate(${x}px, ${y}px)`;
     }
 
-    function goYes() {
+    // 💖 YES button
+    yesBtn.addEventListener("click", () => {
+      localStorage.setItem("playMusic", "yes");
       window.location.href = "yes.html";
-    }
+    });
 
-    // Hearts animation
+    // 💕 Floating hearts
     setInterval(() => {
       const heart = document.createElement("div");
       heart.className = "heart";
@@ -128,17 +135,5 @@
     }, 300);
   </script>
 
-<script>
-  const music = document.getElementById("bgMusic");
-
-  function startMusic() {
-    music.play().catch(() => {});
-    document.removeEventListener("click", startMusic);
-  }
-
-  document.addEventListener("click", startMusic);
-</script>
-
-  <p style="font-size:12px; color:#888;">🔊 Tap anywhere for music</p>
 </body>
 </html>
